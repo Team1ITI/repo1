@@ -1,0 +1,137 @@
+1. Introduction
+
+In software development workflows using Git and repositories hosted on GitHub, developers often use Git stash to temporarily save uncommitted changes without committing them to the repository.
+
+While useful for switching branches or testing fixes quickly, stash usage can introduce several workflow and management issues if not handled carefully.
+
+2. Overview of Git Stash
+
+Git stash allows developers to:
+
+Temporarily save changes in the working directory.
+
+Revert the working directory to the last commit.
+
+Restore the changes later when needed.
+
+Common commands include:
+
+git stash
+git stash list
+git stash apply
+git stash pop
+git stash drop
+
+These commands help developers manage temporary code modifications during development.
+
+3. Common Stash Issues
+3.1 Lost or Forgotten Stashes
+
+One of the most frequent issues is losing track of stashed changes.
+
+Causes
+
+Multiple stashes created without descriptive messages.
+
+Developers forgetting they stashed work.
+
+Impact
+
+Important work may remain unused.
+
+Developers may re-implement already written code.
+
+Example
+git stash list
+stash@{0}: WIP on feature-login
+stash@{1}: WIP on main
+
+Without messages, identifying the correct stash becomes difficult.
+
+3.2 Merge Conflicts When Applying Stash
+
+When applying a stash on a different branch or after pulling updates from GitHub, merge conflicts may occur.
+
+Causes
+
+Files changed in both the stash and the current branch.
+
+Major changes in project structure.
+
+Impact
+
+Time spent resolving conflicts.
+
+Risk of introducing bugs.
+
+3.3 Stash Not Including Untracked Files
+
+By default, git stash does not include untracked files.
+
+Example
+git stash
+
+This command only stashes tracked changes, leaving new files behind.
+
+Solution
+
+Use:
+
+git stash -u
+
+or
+
+git stash --include-untracked
+3.4 Accidental Stash Deletion
+
+Developers sometimes remove stashes accidentally using:
+
+git stash drop
+
+or
+
+git stash clear
+Impact
+
+Potential loss of code if not recoverable.
+
+Time wasted rewriting lost work.
+
+3.5 Applying Wrong Stash
+
+If multiple stashes exist, developers might apply the wrong stash entry.
+
+Example:
+
+git stash apply stash@{2}
+
+If misidentified, this can introduce unrelated changes into the working branch.
+
+3.6 Stash Confusion in Team Environments
+
+Although stashes are local to a developer's machine, teams sometimes assume stashed work exists in the remote repository.
+
+Issues
+
+Team members cannot access another developer’s stash.
+
+Important work may remain hidden locally instead of being committed to GitHub.
+
+4. Best Practices to Avoid Stash Issues
+4.1 Use Descriptive Stash Messages
+git stash push -m "Fix login validation bug"
+4.2 Regularly Review Stash List
+git stash list
+
+Clean unnecessary entries.
+
+4.3 Prefer Branches for Longer Work
+
+Instead of stashing large changes, create a branch:
+
+git checkout -b temp-feature
+4.4 Include Untracked Files When Needed
+git stash -u
+4.5 Avoid Long-Term Stashes
+
+Stashes should be temporary, not used for long-term storage.
