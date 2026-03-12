@@ -1,0 +1,27 @@
+In Git and GitHub, **reset** is a command used to move the current branch pointer to a different commit. It is commonly used to undo commits, remove changes from the staging area, or return the repository to a previous state.
+
+When you run a reset command, Git changes where the branch points in the commit history. Depending on the type of reset used, it may also modify the staging area and the working directory.
+
+There are three main types of reset.
+
+Soft reset moves the branch to a previous commit but keeps all changes staged. This means the commits are removed from the history, but the file changes are still ready to be committed again. The command is:
+
+git reset --soft <commit-hash>
+
+Mixed reset is the default behavior. It moves the branch to a previous commit and unstages the changes, but the modified files remain in the working directory. This allows you to review or edit them before committing again. The command is:
+
+git reset <commit-hash>
+
+Hard reset moves the branch to a previous commit and deletes all changes in the staging area and working directory. The repository will look exactly like it did at that commit. Any uncommitted changes are permanently lost. The command is:
+
+git reset --hard <commit-hash>
+
+Reset can also be used to undo the last commit. For example, if you want to remove the most recent commit but keep the changes in your files, you can run:
+
+git reset --soft HEAD~1
+
+If you want to completely remove the last commit and all its changes, you can run:
+
+git reset --hard HEAD~1
+
+The key idea is that reset changes the commit history of the current branch. Because of this, it should be used carefully, especially if commits have already been pushed to a shared repository on GitHub, since rewriting history can cause problems for other collaborators.
